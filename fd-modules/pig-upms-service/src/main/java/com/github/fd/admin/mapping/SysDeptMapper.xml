@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.fd.admin.mapper.SysDeptMapper">
+
+    <resultMap id="BaseResultMap" type="com.github.fd.admin.model.entity.SysDept">
+        <id column="dept_id" jdbcType="INTEGER" property="deptId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sort" jdbcType="INTEGER" property="orderNum"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="del_flag" jdbcType="CHAR" property="delFlag"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        dept_id, name, sort, create_time, update_time, del_flag, parent_id
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        where dept_id = #{deptId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_dept
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.github.fd.admin.model.entity.SysDept">
+        <selectKey keyProperty="deptId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sys_dept (name, sort, create_time, update_time, del_flag, parent_id)
+        values (#{name,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.github.fd.admin.model.entity.SysDept">
+        <selectKey keyProperty="deptId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="orderNum != null">
+                sort,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{update_time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{del_flag,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parent_id,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.github.fd.admin.model.entity.SysDept">
+        update sys_dept
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                sort = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where dept_id = #{deptId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.github.fd.admin.model.entity.SysDept">
+    update sys_dept
+    set name = #{name,jdbcType=VARCHAR},
+      sort = #{orderNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER}
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </update>
+</mapper>

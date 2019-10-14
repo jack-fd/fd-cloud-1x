@@ -1,0 +1,54 @@
+server:
+  port: 4001
+
+spring:
+  application:
+    name: pig-config-server
+  profiles:
+    active: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/meteor1993/SpringCloudLearning # git仓库的地址
+          search-paths: chapter6/springcloud-config  # git仓库地址下的相对地址，可以配置多个，用,分割。
+          username: #Git仓库用户名
+          password: #Git仓库密码
+---
+spring:
+  profiles: dev
+  rabbitmq:
+    host: 139.224.200.249
+    port: 5682
+    username: pig
+    password: lengleng
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 20
+  client:
+    serviceUrl:
+      defaultZone: http://pig:gip6666@localhost:1025/eureka
+    registry-fetch-interval-seconds: 10
+---
+spring:
+  profiles: prd
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5682
+    username: pig
+    password: lengleng
+  cloud:
+    config:
+      retry:
+        initial-interval: 3000
+        multiplier: 1.5
+        max-interval: 20000
+        max-attempts: 6
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://pig:gip6666@eureka:1025/eureka
