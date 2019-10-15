@@ -1,19 +1,19 @@
-package com.github.fd.admin;
+package com.github.fd.zuul;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
  * @author mq
  */
-@MapperScan("com.github.fd.admin.mapper")
+@EnableZuulProxy
 @EnableEurekaClient
 @SpringBootApplication
-public class FdAdminApplication {
+public class FdZuulApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FdAdminApplication.class, args);
+        SpringApplication.run(FdZuulApplication.class, args);
     }
 }

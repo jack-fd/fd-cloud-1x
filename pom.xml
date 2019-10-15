@@ -65,6 +65,7 @@
         <module>fd-eureka</module>
         <module>fd-modules</module>
         <module>fd-config</module>
+        <module>fd-zuul</module>
     </modules>
 
     <dependencyManagement>
