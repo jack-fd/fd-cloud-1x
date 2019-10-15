@@ -6,11 +6,38 @@ spring:
     name: fd-upms-service
   profiles:
     active: dev
-  datasource:
-    username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/pig?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
-    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        service-id: fd-config-server
+        enabled: true
+      profile: ${spring.profiles.active}
+      label: master
+#  datasource:
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://localhost:3306/pig?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+#    driver-class-name: com.mysql.jdbc.Driver
+
+
+#spring:
+#  application:
+#    name: fd-upms-service
+#  profiles:
+#    active: dev
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/pig?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+#    username: root
+#    password: 123456
+#    driver-class-name: com.mysql.jdbc.Driver
+#    type: com.zaxxer.hikari.HikariDataSource
+#    hikari:
+#      minimum-idle: 3
+#      auto-commit: true
+#      idle-timeout: 10000
+#      pool-name: DatebookHikariCP
+#      max-lifetime: 1800000
 
 mybatis:
   mapper-locations: classpath:com/github/fd/admin/mapping/*Mapping.xml
