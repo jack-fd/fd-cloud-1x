@@ -19,6 +19,13 @@ spring:
     sleuth:
       sampler:
         percentage: 1.0
+  boot: # 上报 给admin server 应用监控管理
+    admin:
+      url: http://localhost:5000
+
+management:
+  security:
+    enabled: false
 
 #  datasource:
 #    username: root

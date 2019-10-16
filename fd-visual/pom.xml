@@ -8,6 +8,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>fd-zipkin</module>
+        <module>fd-monitor</module>
     </modules>
 
     <parent>
