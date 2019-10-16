@@ -1,22 +1,12 @@
 server:
-  port: 8080
+  port: 9411
 
 spring:
   application:
-    name: fd-zuul
+    name: fd-zipkin-server
   profiles:
     active: dev
-  sleuth:
-    sampler:
-      percentage: 1.0
-  zipkin:
-    base-url: http://localhost:9411
 
-zuul:
-  routes:
-    api-producer:
-      path: /fd/**
-      serviceId: fd-upms-service
 ---
 spring:
   profiles: dev
